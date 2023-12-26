@@ -9,7 +9,7 @@ MCU = atmega328p
 F_CPU = 16000000
 
 TARGET = firmware
-SRC = main.c
+SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 LST = $(SRC:.c=.lst)
 
@@ -61,7 +61,7 @@ all: gccversion $(TARGET).elf $(TARGET).hex size
 
 %.o : %.c
 	@echo $(MSG_COMPILING) $<
-	$(CC) $(CFLAGS) -c $< -o $(@F)
+	$(CC) $(CFLAGS) -c $< -o $(@)
 
 gccversion:
 	@$(CC) --version
