@@ -7,6 +7,7 @@ REMOVE = rm -f
 
 MCU = atmega328p
 F_CPU = 16000000
+AVRDUDE_PORT = /dev/ttyUSB0
 
 TARGET = firmware
 SRC = $(wildcard src/*.c)
@@ -39,6 +40,7 @@ AVRDUDE_SPEED = -B 1MHz
 AVRDUDE_FLAGS = -p $(AVRDUDE_MCU)
 AVRDUDE_FLAGS += -c $(AVRDUDE_PROGRAMMER)
 AVRDUDE_FLAGS += $(AVRDUDE_SPEED)
+AVRDUDE_FLAGS += -P $(AVRDUDE_PORT)
 
 MSG_LINKING = Linking:
 MSG_COMPILING = Compiling:
@@ -74,7 +76,7 @@ analyze: $(TARGET).elf
 	$(NM) -S --size-sort -t decimal $(TARGET).elf
 
 isp: $(TARGET).hex
-	$(AVRDUDE) $(AVRDUDE_FLAGS) -U flash:w:$(TARGET).hex
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U flash:w:$(TARGET).hex:i
 
 release: isp
 
