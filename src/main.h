@@ -5,8 +5,7 @@
 #ifndef ARDUINOTEMPGRAPH_MAIN_H
 #define ARDUINOTEMPGRAPH_MAIN_H
 
-#define F_CPU 16000000UL
-
 int main(void);
+void USART_Transmit(char *data);
 
 #endif //ARDUINOTEMPGRAPH_MAIN_H
